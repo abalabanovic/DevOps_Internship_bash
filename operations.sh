@@ -1,24 +1,23 @@
 #!/bin/bash
 
-OPTSTRING=":o:n:d:"
+OPTSTRING=":o:n:"
 
 while getopts ${OPTSTRING} opt; do
 
 	case ${opt} in
 
-	d)
-
-		echo "User:$USER"
-		echo "Script:$0"
-		echo "Operation:$operation"
-		echo "Numbers:${NUMBERS[@]}"
-
-		;;
-
-
 	o)
 
 		operation=${OPTARG}
+
+		if [ "$operation" != "+" ] && [ "$operation" != "-" ] && [ "$operation" != "*" ] && [ "$operation" != "/" ];then
+
+			echo "Error:Invalid operations"
+			echo "For *, provide '*'"
+			exit 1
+
+
+		fi
 
 		;;
 	n)
@@ -29,7 +28,7 @@ while getopts ${OPTSTRING} opt; do
 
 		NUMBERS+=( "$OPTARG" )
 
-		while [[ ${!OPTIND} && ${!OPTIND} != -* ]]; do
+		while [[ $OPTIND -le $# && ${!OPTIND} && ${!OPTIND} != -* ]]; do
 
 		NUMBERS+=( "${!OPTIND}" )
 		((OPTIND++))
@@ -45,20 +44,42 @@ while getopts ${OPTSTRING} opt; do
 
 done
 
+OPTIND=1
 
-		result=0
+while getopts ":d:" opt;do
+
+	case $opt in
+
+	d)
+
+		APT=$OPTARG
+		echo "you are here"
+
+	;;
+
+	esac
+
+done
+
+
 
 		length=${#NUMBERS[@]}
+		result=${NUMBERS[0]}
+		if [ $length -eq 0 ];then
+			echo "No arguments provided"
+			exit 1
+		fi
 
-		for ((i=0;i<length;i++))
+
+		for ((i=1;i<length;i++))
 		do
 
 		temp=${NUMBERS[i]}
-		let "result1=result1 $operation temp"
+		let "result=result $operation temp"
 
 		done
 
-		echo "Result is $result1"
+		echo "Result is $result"
 
 
 

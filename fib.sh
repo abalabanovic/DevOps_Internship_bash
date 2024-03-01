@@ -39,4 +39,4 @@ done
 
 	done
 
-	echo "$a"
+	echo "$fn"

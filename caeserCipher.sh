@@ -8,7 +8,7 @@ while getopts ${GETSTRING} opt; do
 
 	s)
 
-		cipher_number=${OPTARG}
+		r=${OPTARG}
 
 
 	;;
@@ -60,11 +60,16 @@ done
 
 	a=abcdefghijklmnopqrstuvwxyz
 	b=ABCDEFGHIJKLMNOPQRSTUVWXYZ
-	r=cipher_number
+
+	if (($r > 26 ));then
+
+		r=$((r % 26))
+
+	fi
 
 	new_text=$(<<< "$value" sed "y/$a$b/${a:$r}${a::$r}${b:$r}${b::$r}/")
 
 	# PRINT TO A NEW FILE
 
-	echo "$new_text" | sudo tee $output_file 
+	echo "$new_text" | sudo tee $output_file
 

@@ -1,74 +1,40 @@
 #!/bin/bash
 
-echo "Please use quotation mark when providing strings!"
+GETSTRING=":i:r:o"
 
-OPTSTRING=":v:s:r:l:u:o:"
-
-while getopts ${OPTSTRING} opt; do
+while getopts ${GETSTRING} opt; do
 
 	case ${opt} in
 
-	l)
+	i)
 
-		#Convert to lower case
+		input_file=${OPTARG}
 
+		if [ -f $input_file ]
+		then
 
-		value=$(echo "${OPTARG}" | tr '[A-Z]' '[a-z]')
-
-		;;
-
-	u)
-
-		#Convert to upper case
-
-		value=$(echo "${OPTARG}" | tr '[a-z]' '[A-Z]')
-
-		;;
-
-	r)
-
-		#Reverse text
-
-		value=$(echo ${OPTARG} | rev)
-
-	;;
-
-	v)
-
-		#Change upper to lower and lower to upper
-
-		if echo "${OPTARG}" 1>/dev/null | sed '/[A-Z]/q'; then
-
-			value=$(echo "${OPTARG}" | tr '[A-Z]' '[a-z]')
-			echo "$value"
-
+			value=$(<$input_file)
 		else
 
-			value=$(echo "${OPTARG}" | tr '[a-z]' '[A-Z]')
-			echo "$value"
-
+			echo "Input file does not exist"
 
 		fi
-
-
 	;;
 
 	o)
 
 		output_file=${OPTARG}
-		flag_output=1
-
 	;;
 
 
-esac
+	r)
+
+		echo "ALOOOOOO"
+		value=$(echo "$value" | rev)
+		echo "$value"
+
+	;;
+
+	esac
 
 done
-
-	if [ "$flag_output" -eq "1" ]
-	then
-
-		echo "New text is: "
-		echo "$value" | sudo tee $output_file
-
-	fi
