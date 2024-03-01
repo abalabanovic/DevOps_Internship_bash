@@ -53,7 +53,7 @@ while getopts ":d:" opt;do
 	d)
 
 		APT=$OPTARG
-		echo "you are here"
+		echo "cant get here"
 
 	;;
 
