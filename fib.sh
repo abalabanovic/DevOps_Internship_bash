@@ -5,9 +5,9 @@ VALUE=0
 while :
 do
 
-	read INPUT
+	read -r INPUT
 
-	if [ $INPUT -lt 0 ]
+	if [ "$INPUT" -lt 0 ]
 	then
 
 		echo "The value must be >0.Please try again!!"
@@ -19,7 +19,7 @@ do
 
 done
 
-	if [ $VALUE -eq 0 ]
+	if [ "$VALUE" -eq 0 ]
 	then
 
 		echo "0"

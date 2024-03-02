@@ -2,7 +2,7 @@
 
 #generate report file
 
-$today=$(date)
+today=$(date)
 echo "Date and time: $today" > report.txt
 echo "User:$USER" >> report.txt
 linux_version=$(uname -rs)

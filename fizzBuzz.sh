@@ -4,19 +4,19 @@
 	for((i=1;i<=100;i++))
 	do
 
-	if (( $i%3 == 0 && $i%5 == 0 ))
+	if (( i%3 == 0 && i%5 == 0 ))
 	then
 
 		echo "FizzBuzz"
 
 	else
 
-		if (( $i%3 == 0 ))
+		if (( i%3 == 0 ))
 		then
 
 		echo "Fizz"
 
-		elif (( $i%5 == 0 ))
+		elif (( i%5 == 0 ))
 		then
 
 		echo "Buzz"

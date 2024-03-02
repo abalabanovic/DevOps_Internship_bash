@@ -23,10 +23,10 @@ while getopts ${GETSTRING} opt; do
 
 		input_file=${OPTARG}
 
-		if [ -f $input_file ]
+		if [ -f "$input_file" ]
 		then
 
-			value=$(<$input_file)
+			value=$(<"$input_file")
 
 
 		else
@@ -61,7 +61,7 @@ done
 	a=abcdefghijklmnopqrstuvwxyz
 	b=ABCDEFGHIJKLMNOPQRSTUVWXYZ
 
-	if (($r > 26 ));then
+	if ((r > 26 ));then
 
 		r=$((r % 26))
 
@@ -71,5 +71,5 @@ done
 
 	# PRINT TO A NEW FILE
 
-	echo "$new_text" | sudo tee $output_file
+	echo "$new_text" | sudo tee "$output_file"
 
