@@ -1,10 +1,21 @@
 #!/bin/bash
 
-OPTSTRING=":o:n:"
+OPTSTRING=":o:n:d"
 
 while getopts ${OPTSTRING} opt; do
 
 	case ${opt} in
+
+
+	d)
+
+		echo "User: $USER"
+		echo "Script name : $0"
+		echo "Operation : $operation"
+		echo "Numbers : ${NUMBERS[@]}"
+
+	;;
+
 
 	o)
 
@@ -21,6 +32,7 @@ while getopts ${OPTSTRING} opt; do
 
 		;;
 	n)
+
 
 # GETOPT cant take more arguments in one case but we can move the index
 
@@ -43,25 +55,6 @@ while getopts ${OPTSTRING} opt; do
 	esac
 
 done
-
-OPTIND=1
-
-while getopts ":d:" opt;do
-
-	case $opt in
-
-	d)
-
-		APT=$OPTARG
-		echo "cant get here"
-
-	;;
-
-	esac
-
-done
-
-
 
 		length=${#NUMBERS[@]}
 		result=${NUMBERS[0]}
